@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Examen Psicología</title>
+<style>
+body { font-family: Arial; padding: 20px; max-width: 800px; margin:auto;}
+.question { margin-bottom: 20px; }
+button { padding:10px; font-size:16px;}
+</style>
+</head>
+<body>
+
+<h2>Examen Unidades 3 y 4</h2>
+
+<form id="quizForm"></form>
+
+<button onclick="corregir()">Corregir</button>
+<p id="resultado"></p>
+
+<script>
+const preguntas = [
+["Objeto de la psicología contemporánea","c",
+["Conducta observable","Procesos inconscientes","Conducta y mente","Solo fisiología","Solo sociedad"]],
+["Enfoque evolucionista","c",
+["Aprendizaje puro","Sin biología","Adaptación","Cultura total","Sin genética"]],
+["Psicología cultural","c",
+["Universal","Independiente","Construcción cultural","Biológica","Experimental"]],
+["Disenso en psicología","b",
+["Sin método","Objeto distinto","Sin teoría","Sin evidencia","Errores"]],
+["Ser humano","c",
+["Biológico","Cerrado","Biopsicosocial","Mecánico","Sin contexto"]],
+["Atención","b",
+["Memoria","Selección","Respuesta","Inconsciente","Asociación"]],
+["Sensopercepción","c",
+["Interno","Sin interpretación","Integración","Memoria","Reflejo"]],
+["Aprendizaje","b",
+["Temporal","Cambio duradero","Genético","Reflejo","Fisiológico"]],
+["Memoria","b",
+["Almacén","3 procesos","Atención","Sensación","Conducta"]],
+["Emoción","b",
+["Biológica","Adaptativa","Inútil","Social","Cognitiva"]],
+["Funciones ejecutivas","b",
+["Procesar","Planificar","Recordar","Percibir","Automatizar"]],
+["Cognición social","b",
+["Individual","Interpretar otros","Reflejo","Biológico","Motor"]],
+["Atención selectiva","a",
+["Filtra info","Memoria","Emoción","Lenguaje","Reflejo"]],
+["Memoria largo plazo","c",
+["Sensorial","Corta","Duradera","Reflejo","Automática"]],
+["Aprendizaje social","d",
+["Condicionamiento","Genética","Reflejo","Observación","Ensayo"]],
+["Emoción básica","a",
+["Universal","Cultural","Aprendida","Artificial","Social"]],
+["Función ejecutiva clave","c",
+["Memoria","Percepción","Control inhibitorio","Reflejo","Sensorial"]],
+["Percepción","b",
+["Registro","Interpretación","Memoria","Acción","Emoción"]],
+["Atención sostenida","d",
+["Breve","Selectiva","Alternante","Prolongada","Automática"]],
+["Cognición social implica","e",
+["Genes","Reflejos","Instinto","Motor","Interacción social"]]
+];
+
+const form = document.getElementById("quizForm");
+
+preguntas.forEach((p,i)=>{
+let html = `<div class='question'><p>${i+1}. ${p[0]}</p>`;
+p[2].forEach((op,j)=>{
+let val = String.fromCharCode(97+j);
+html += `<input type="radio" name="q${i}" value="${val}"> ${op}<br>`;
+});
+html += "</div>";
+form.innerHTML += html;
+});
+
+function corregir(){
+let correctas=0;
+preguntas.forEach((p,i)=>{
+let sel = document.querySelector(`input[name=q${i}]:checked`);
+if(sel && sel.value===p[1]) correctas++;
+});
+document.getElementById("resultado").innerHTML =
+`Resultado: ${correctas}/20`;
+}
+</script>
+
+</body>
+</html>
